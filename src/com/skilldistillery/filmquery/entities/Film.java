@@ -176,6 +176,7 @@ public class Film {
 	public void setFeatures(String features) {
 		this.specialFeatures = features;
 	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -183,8 +184,9 @@ public class Film {
 				.append(description).append(", releaseYear=").append(releaseYear).append(", languageID=")
 				.append(languageID).append(", rentalDuration=").append(rentalDuration).append(", rentalRate=")
 				.append(rentalRate).append(", length=").append(length).append(", replacementCost=")
-				.append(replacementCost).append(", rating=").append(rating).append(", specialFeatures=").append(specialFeatures)
-				.append("]");
+				.append(replacementCost).append(", rating=").append(rating).append(", specialFeatures=")
+				.append(specialFeatures).append(", language=").append(language).append(", listOfActors=")
+				.append(listOfActors).append(", category=").append(category).append("]");
 		return builder.toString();
 	}
 	public String getLanguage() {

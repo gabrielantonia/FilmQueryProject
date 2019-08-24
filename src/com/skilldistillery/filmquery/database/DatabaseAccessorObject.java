@@ -35,16 +35,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		while (quit == false) {
 			quit = dAO.menu1(sc, dAO);
 		}
-//		System.out.println("Enter Film ID# :");
-//		System.out.println(DAO.findFilmById(sc.nextInt()));
-//		System.out.println("Enter Actor ID # :");
-//		System.out.println(DAO.findActorById(sc.nextInt()));
-//		System.out.println("Enter Film ID # :");
-//		for (Actor actor : DAO.findActorsByFilmId(sc.nextInt())) {
-//			System.out.println(actor.toString());
-//		}
-//		sc.close();
-
 	}
 
 	private Boolean menu1(Scanner sc, DatabaseAccessorObject dAO) throws SQLException {
@@ -57,21 +47,31 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		System.out.println("3. Exit the application.");
 		System.out.println("---------------------------------------");
 		int choice = 0;
-		try {
-			choice = sc.nextInt();
-		} catch (Exception e) {
-			System.out.println("invalid input");
+		boolean valid = false;
+		do {
+			try {
+				choice = sc.nextInt();
+				valid = true;
+			} catch (Exception e) {
+				System.out.println("invalid input");
+				sc.nextLine();
+			}
+		} while (valid == false);
 
-		}
 		switch (choice) {
 		case 1:
 			System.out.println("Enter Film ID# :");
-			try {
-				choice = sc.nextInt();
-			} catch (Exception e) {
-				System.out.println("invalid input");
+			valid = false;
+			do {
+				try {
+					choice = sc.nextInt();
+					valid = true;
+				} catch (Exception e) {
+					System.out.println("invalid input");
+					sc.nextLine();
+				}
+			} while (valid == false);
 
-			}
 			if (choice > 0 && choice <= 1000) {
 				Film film = dAO.findFilmById(choice, dAO);
 				System.out.println("---------------------------------------");
@@ -84,6 +84,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				}
 				System.out.println("---------------------------------------");
 				System.out.println();
+				dAO.menu2(sc, film);
 			} else {
 				System.out.println("This film is not in stock");
 			}
@@ -91,12 +92,16 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		case 2:
 			System.out.println("Enter a keyword :");
 			String keyword = null;
-			try {
-				keyword = sc.next();
-			} catch (Exception e) {
-				System.out.println("invalid input");
-
-			}
+			valid = false;
+			do {
+				try {
+					keyword = sc.next();
+					valid = true;
+				} catch (Exception e) {
+					System.out.println("invalid input");
+					sc.nextLine();
+				}
+			} while (valid == false);
 			List<Film> list = dAO.findFilmByKeyword(keyword, dAO);
 			if (list == null || list.isEmpty()) {
 				System.out.println("No titles were found containing " + keyword + ".");
@@ -112,6 +117,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					}
 					System.out.println("---------------------------------------");
 					System.out.println();
+					dAO.menu2(sc, film);
 				}
 			}
 			break;
@@ -124,6 +130,33 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		}
 		return quit;
 
+	}
+
+	private void menu2(Scanner sc, Film film) {
+		System.out.println("1. See more details ");
+		System.out.println("2. continue");
+		int choice = 0;
+		try {
+			choice = sc.nextInt();
+		} catch (Exception e) {
+			System.out.println("invalid option");
+		}
+		boolean quit = false;
+		
+		do {
+			switch (choice) {
+			case 1:
+				System.out.println(film.toString());
+				quit = true;
+				break;
+			case 2:
+				quit = true;
+				break;
+			default:
+				System.out.println("invalid option");
+				break;
+			}
+		} while (quit == false);
 	}
 
 	@Override
@@ -185,7 +218,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		try {
 			conn = DriverManager.getConnection(URL, userName, password);
 		} catch (SQLException e) {
-			
+
 		}
 		String sql = "select film.id, film.title, film.description, film.release_year, film.language_id, film.rental_duration, film.rental_rate,film.length, film.replacement_cost, film.rating, film.special_features,language.name as 'language', category.name as 'category name' from film join language on language.id = film.language_id join film_category on film.id = film_category.film_id join category on category.id = film_category.category_id where film.title like ?;";
 
