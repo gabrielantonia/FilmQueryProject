@@ -1,7 +1,45 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.util.List;
+
 public class Film {
 	
+
+	private int id; 
+	private String title;
+	private String description;
+	private int releaseYear;
+	private int languageID;
+	private int rentalDuration;
+	private double rentalRate;
+	private int length;
+	private double replacementCost;
+	private String rating;
+	private String specialFeatures;
+	private String language;
+	private List<Actor> listOfActors;
+	private String category;
+	
+	
+	public Film(int id, String title, String description, int releaseYear, int languageID, int rentalDuration,
+			double rentalRate, int length, double replacementCost, String rating, String specialFeatures,
+			String language, List<Actor> listOfActors, String category) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.releaseYear = releaseYear;
+		this.languageID = languageID;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.length = length;
+		this.replacementCost = replacementCost;
+		this.rating = rating;
+		this.specialFeatures = specialFeatures;
+		this.language = language;
+		this.listOfActors = listOfActors;
+		this.category = category;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,32 +108,8 @@ public class Film {
 	public Film() {
 		super();
 	}
-	public Film(int id, String title, String description, int releaseYear, int languageID, int rentalDuration,
-			double rentalRate, int length, double replacementCost, String rating, String specialFeatures) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.releaseYear = releaseYear;
-		this.languageID = languageID;
-		this.rentalDuration = rentalDuration;
-		this.rentalRate = rentalRate;
-		this.length = length;
-		this.replacementCost = replacementCost;
-		this.rating = rating;
-		this.specialFeatures = specialFeatures;
-	}
-	private int id; 
-	private String title;
-	private String description;
-	private int releaseYear;
-	private int languageID;
-	private int rentalDuration;
-	private double rentalRate;
-	private int length;
-	private double replacementCost;
-	private String rating;
-	private String specialFeatures;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -172,5 +186,23 @@ public class Film {
 				.append(replacementCost).append(", rating=").append(rating).append(", specialFeatures=").append(specialFeatures)
 				.append("]");
 		return builder.toString();
+	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	public List<Actor> getListOfActors() {
+		return listOfActors;
+	}
+	public void setListOfActors(List<Actor> listOfActors) {
+		this.listOfActors = listOfActors;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }
