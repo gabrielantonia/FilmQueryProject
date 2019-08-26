@@ -97,7 +97,7 @@ public class FilmQueryApp {
 			if (list == null || list.isEmpty()) {
 				System.out.println("No titles were found containing " + keyword + ".");
 			} else {
-//				list.stream().forEachOrdered(item->System.out.println();
+
 				for (Film film : list) {
 					System.out.println("---------------------------------------");
 					System.out.println("Title: " + film.getTitle() + "\nRelease Year: " + film.getReleaseYear()
@@ -109,7 +109,9 @@ public class FilmQueryApp {
 					}
 					System.out.println("\n---------------------------------------");
 					System.out.println();
-					menu2(sc, film);
+					if (menu2(sc, film) == true) {
+						break;
+					}
 				}
 			}
 			break;
