@@ -69,7 +69,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		stmt.setInt(1, actorId);
 		ResultSet rs = stmt.executeQuery();
 		rs.next();
+		if(actorId>0 && actorId<1000) {
 		actor = new Actor(rs.getInt(1), rs.getString(2), rs.getString(3));
+		}
 		rs.close();
 		stmt.close();
 		conn.close();

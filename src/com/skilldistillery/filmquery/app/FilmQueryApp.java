@@ -3,7 +3,6 @@ package com.skilldistillery.filmquery.app;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
 import com.skilldistillery.filmquery.entities.Actor;
