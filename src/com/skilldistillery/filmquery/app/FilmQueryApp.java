@@ -32,7 +32,7 @@ public class FilmQueryApp {
 		boolean quit = false;
 		System.out.println("---------------------------------------");
 		System.out.println("Welcome, what would you like to do?");
-		System.out.println("1. Look up a film by its ID. (1-1000)");
+		System.out.println("1. Look up a film by its ID. ");
 		System.out.println("2. Look up a film by a search keyword.");
 		System.out.println("3. Exit the application.");
 		System.out.println("---------------------------------------");
@@ -62,8 +62,11 @@ public class FilmQueryApp {
 				}
 			} while (valid == false);
 
-			if (choice > 0 && choice <= 1000) {
 				Film film = dAO.findFilmById(choice);
+				if(film == null) {
+					System.out.println("This film is not in stock");
+				}
+				else {
 				System.out.println("---------------------------------------");
 				System.out.println("Title: " + film.getTitle() + "\nRelease Year: " + film.getReleaseYear()
 						+ "\nRating: " + film.getRating() + "\nDescription: " + film.getDescription() + ". "
@@ -75,9 +78,7 @@ public class FilmQueryApp {
 				System.out.println("\n---------------------------------------");
 				System.out.println();
 				menu2(sc, film);
-			} else {
-				System.out.println("This film is not in stock");
-			}
+				}
 			break;
 		case 2:
 			System.out.println("Enter a keyword :");
@@ -97,18 +98,18 @@ public class FilmQueryApp {
 				System.out.println("No titles were found containing " + keyword + ".");
 			} else {
 
-				for (Film film : list) {
+				for (Film film1 : list) {
 					System.out.println("---------------------------------------");
-					System.out.println("Title: " + film.getTitle() + "\nRelease Year: " + film.getReleaseYear()
-							+ "\nRating: " + film.getRating() + "\nDescription: " + film.getDescription() + ". "
-							+ "\nLanguage: " + film.getLanguage() + "\nCategory: " + film.getCategory());
+					System.out.println("Title: " + film1.getTitle() + "\nRelease Year: " + film1.getReleaseYear()
+							+ "\nRating: " + film1.getRating() + "\nDescription: " + film1.getDescription() + ". "
+							+ "\nLanguage: " + film1.getLanguage() + "\nCategory: " + film1.getCategory());
 					System.out.print("Actors: ");
-					for (Actor actor : film.getListOfActors()) {
+					for (Actor actor : film1.getListOfActors()) {
 						System.out.print(actor.getFirstName() + " " + actor.getLastName() + " | ");
 					}
 					System.out.println("\n---------------------------------------");
 					System.out.println();
-					if (menu2(sc, film) == true) {
+					if (menu2(sc, film1) == true) {
 						break;
 					}
 				}
